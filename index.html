@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Danish With Ai</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:#f0f0f0;
+}
+
+#a4{
+
+width:8.27in;
+height:11.69in;
+
+margin:auto;
+
+display:grid;
+
+grid-template-columns:repeat(4,1.2in);
+grid-template-rows:repeat(6,1.5in);
+
+gap:0.2in;
+
+justify-content:center;
+align-content:center;
+
+background:white;
+
+}
+
+.photo{
+
+width:1.2in;
+height:1.5in;
+
+background:#2a66ff;
+
+overflow:hidden;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+.photo img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+button{
+
+margin:15px;
+padding:10px 20px;
+font-size:16px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Danish With Ai</h2>
+
+<input type="file" id="upload">
+
+<br><br>
+
+<div id="a4">
+
+<div class="photo"><img id="img1"></div>
+<div class="photo"><img id="img2"></div>
+<div class="photo"><img id="img3"></div>
+<div class="photo"><img id="img4"></div>
+
+<div class="photo"><img id="img5"></div>
+<div class="photo"><img id="img6"></div>
+<div class="photo"><img id="img7"></div>
+<div class="photo"><img id="img8"></div>
+
+<div class="photo"><img id="img9"></div>
+<div class="photo"><img id="img10"></div>
+<div class="photo"><img id="img11"></div>
+<div class="photo"><img id="img12"></div>
+
+<div class="photo"><img id="img13"></div>
+<div class="photo"><img id="img14"></div>
+<div class="photo"><img id="img15"></div>
+<div class="photo"><img id="img16"></div>
+
+<div class="photo"><img id="img17"></div>
+<div class="photo"><img id="img18"></div>
+<div class="photo"><img id="img19"></div>
+<div class="photo"><img id="img20"></div>
+
+<div class="photo"><img id="img21"></div>
+<div class="photo"><img id="img22"></div>
+<div class="photo"><img id="img23"></div>
+<div class="photo"><img id="img24"></div>
+
+</div>
+
+<br>
+
+<button onclick="window.print()">Print / clickme</button>
+
+<script>
+
+async function removeBackground(file){
+
+let formData=new FormData()
+formData.append("image_file",file)
+
+let response=await fetch("https://api.remove.bg/v1.0/removebg",{
+
+method:"POST",
+
+headers:{
+"X-Api-Key":"BEcd7eWKBNrULBxMchqht4SD"
+},
+
+body:formData
+
+})
+
+let blob=await response.blob()
+
+return URL.createObjectURL(blob)
+
+}
+
+document.getElementById("upload").onchange=async function(e){
+
+let file=e.target.files[0]
+
+let image=await removeBackground(file)
+
+for(let i=1;i<=24;i++){
+
+document.getElementById("img"+i).src=image
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
